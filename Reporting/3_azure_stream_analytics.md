@@ -98,5 +98,17 @@ You should see something like this in the Input preview pane at the lower part o
 ![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sample_preview.jpg)
 
 If you don't see any values in the input preview then you first need to run a sample on the _BeerIn_ Input.
+To do this follow these steps (remember if you have preview data you can skip this!):
+1. Click on __Select time range__
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sampling.jpg)
+
+2. Change the Days under the heading "Duration" to 1. This will make it sample data from the last 24 hours.
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sample_duration.jpg)
+
+3. Click on __Sample__ (bottom of the page)
+
+Sampling can take a couple of minutes you can see if it finished in the notifications section of the azure portal (The tiny alarmbel on the top right).
 
 If you do see data, then you can select/highlight one of the queries fro the query editor and click on __Test selected query__ to see if the query will give you any results. Please keep in mind that this test is run on the sampled data! __It is not a realtime query on the IoT-Hub!!!__
