@@ -112,3 +112,24 @@ To do this follow these steps (remember if you have preview data you can skip th
 Sampling can take a couple of minutes you can see if it finished in the notifications section of the azure portal (The tiny alarmbel on the top right).
 
 If you do see data, then you can select/highlight one of the queries fro the query editor and click on __Test selected query__ to see if the query will give you any results. Please keep in mind that this test is run on the sampled data! __It is not a realtime query on the IoT-Hub!!!__
+
+
+### Starting the job
+Now that we have configured our IN and OUTputs, we can try starting the job.
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_start_job.jpg)
+
+Click on __Start__. Actually starting the job might take up to a minute or so.
+
+Our job failed to start WTF?!
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/WTF.jpg)
+
+
+If you get an error you can find the reaon in the Activity Log.
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_failure_log.jpg)
+
+Aah the firewall on the sql server is blocking the Stream Analytics job:
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_firewall_deny.jpg)
