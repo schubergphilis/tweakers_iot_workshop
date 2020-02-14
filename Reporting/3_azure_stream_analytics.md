@@ -37,7 +37,9 @@ For the Output's we need more than 1, we will create 3 outputs (a fourth will be
 **First Output IOStat data**
 
 1. On the Stream Analytics Job's page click on **Outputs**
+
 ![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_output.jpg)
+
 2. Click on **Add** and select *SQL Database*
 3. Fill in the Folowing Details (If it is not mentioned below, use the default value):
       * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerIOstat_ for example) 
@@ -82,6 +84,7 @@ The magic of the Stream Analytics job happens in the Query. The query will read 
 
 ### Adding the query
 On the page of the Azure Stream Analytics Job click on Query (you could also click on _edit query_ on the tiny editor on the overview page). 
+
 ![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_query.jpg)
 
 If you Followed our name suggestions from the above you can copy the query (stream_analytics_query_part1.sql) from the subfolder _stream_analytics_ and paste it in the query screen.
@@ -95,6 +98,7 @@ Once you replaced these values you can click on __Save query__.
 
 ### Testing the query
 You should see something like this in the Input preview pane at the lower part of the screen.
+
 ![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sample_preview.jpg)
 
 If you don't see any values in the input preview then you first need to run a sample on the _BeerIn_ Input.
