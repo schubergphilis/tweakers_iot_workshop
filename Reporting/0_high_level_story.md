@@ -11,7 +11,7 @@ What services in Azure are Used:
 - Supporting services (like VNET's, storage accounts etc.)
 
 ## Small Architecture sketch
-![High Level Architecture](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/high_level_architecture.jpg "Architecture")
+![High Level Architecture](img/high_level_architecture.jpg "Architecture")
 
 
 ## Setup per table

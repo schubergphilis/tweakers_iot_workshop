@@ -23,7 +23,7 @@ There is only one input neccesary and that is our IoT-Hub, so let's configure it
 1. Once the job is created go to the deployed resource in the Azure Portal.
 2. We need to define an Input for this job. Click on **Inputs**
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_input.jpg)
+![Stream Analytics](img/asa_input.jpg)
 
 3. Click on **Add Stream Input** and select **IoT Hub**
 4. Give the new Input a nice Alias (_BeerIN_ for example). Now only change the IOT HUB to match the one that belongs to the table you are sitting at and Change the _Consumer group_ to the one you created earlier when you configured the IoT-Hub. Leave the other fields at their default values.
@@ -38,7 +38,7 @@ For the Output's we need more than 1, we will create 3 outputs (a fourth will be
 
 1. On the Stream Analytics Job's page click on **Outputs**
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_output.jpg)
+![Stream Analytics](img/asa_output.jpg)
 
 2. Click on **Add** and select *SQL Database*
 3. Fill in the Folowing Details (If it is not mentioned below, use the default value):
@@ -77,7 +77,7 @@ For the Output's we need more than 1, we will create 3 outputs (a fourth will be
 4. Click __Save__
 
 You now should see something like this:
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_output_result.jpg)
+![Stream Analytics](img/asa_output_result.jpg)
 
 ## Configuring the Stream Analytics Job Query
 The magic of the Stream Analytics job happens in the Query. The query will read the data from the IoT-Hub (Input), Transform it a little bit and send it to the SQL Database Tables (Outputs).
@@ -85,7 +85,7 @@ The magic of the Stream Analytics job happens in the Query. The query will read 
 ### Adding the query
 On the page of the Azure Stream Analytics Job click on Query (you could also click on _edit query_ on the tiny editor on the overview page). 
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_query.jpg)
+![Stream Analytics](img/asa_query.jpg)
 
 If you Followed our name suggestions from the above you can copy the query (stream_analytics_query_part1.sql) from the subfolder _stream_analytics_ and paste it in the query screen.
 If you __did not__ follow your naming suggestions then please replace the following values in the query with the names __you picked__.
@@ -99,17 +99,17 @@ Once you replaced these values you can click on __Save query__.
 ### Testing the query
 You should see something like this in the Input preview pane at the lower part of the screen.
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sample_preview.jpg)
+![Stream Analytics](img/asa_sample_preview.jpg)
 
 If you don't see any values in the input preview then you first need to run a sample on the _BeerIn_ Input.
 To do this follow these steps (remember if you have preview data you can skip this!):
 1. Click on __Select time range__
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sampling.jpg)
+![Stream Analytics](img/asa_sampling.jpg)
 
 2. Change the Days under the heading "Duration" to 1. This will make it sample data from the last 24 hours.
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sample_duration.jpg)
+![Stream Analytics](img/asa_sample_duration.jpg)
 
 3. Click on __Sample__ (bottom of the page)
 
@@ -121,32 +121,32 @@ If you do see data, then you can select/highlight one of the queries fro the que
 ### Starting the job
 Now that we have configured our IN and OUTputs, we can try starting the job.
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_start_job.jpg)
+![Stream Analytics](img/asa_start_job.jpg)
 
 Click on __Start__. Actually starting the job might take up to a minute or so.
 
 Our job failed to start WTF?!
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/WTF.jpg)
+![Stream Analytics](img/WTF.jpg)
 
 
 If you get an error you can find the reaon in the Activity Log.
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_failure_log.jpg)
+![Stream Analytics](img/asa_failure_log.jpg)
 
 Aah the firewall on the sql server is blocking the Stream Analytics job:
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_firewall_deny.jpg)
+![Stream Analytics](img/asa_firewall_deny.jpg)
 
 
 Let us fix this, go back to the SQL Server you created earlier (The SQL Server, not the SQL DB ;) )
 You shouls be able to find the SQL Server in your resource Group:
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sql_server.jpg)
+![Stream Analytics](img/asa_sql_server.jpg)
 
 When you are in the Overview screen of your SQL Server, go to the __Firewalls and virtual networks__ setting under the __security__ section.
 
-![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sql_firewall.jpg)
+![Stream Analytics](img/asa_sql_firewall.jpg)
 
 You can now do either do one of these things.
 1. Add all the available Azure Stream Analytics IP Addresses
