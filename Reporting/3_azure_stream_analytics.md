@@ -137,3 +137,31 @@ If you get an error you can find the reaon in the Activity Log.
 Aah the firewall on the sql server is blocking the Stream Analytics job:
 
 ![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_firewall_deny.jpg)
+
+
+Let us fix this, go back to the SQL Server you created earlier (The SQL Server, not the SQL DB ;) )
+You shouls be able to find the SQL Server in your resource Group:
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sql_server.jpg)
+
+When you are in the Overview screen of your SQL Server, go to the __Firewalls and virtual networks__ setting under the __security__ section.
+
+![Stream Analytics](https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/img/asa_sql_firewall.jpg)
+
+You can now do either do one of these things.
+1. Add all the available Azure Stream Analytics IP Addresses
+2. OR turn on the __Allow Azure services and resources to access this server
+
+For the sake of the workshop, I suggest going for option 2. In real life you might want to be a bit more restrictive in this from a security point of view.
+
+So enable the feature and click on __Save__.
+
+![Stream Analytics](img/asa_sql_allow_azure.jpg)
+
+Now let's try to start the job again! It should start now...(if it doesn't please ask for help)
+
+Congratulations Data from the sensors should come through to SQL Server now.
+
+### Why we chose SQL Server as Output
+As we are going to use Grafana to visualize the data, the more obvious choise would be an InfluxDB or something like that. However Azure Stream Analytics does not support InfluxDB as an output.
+If we would want to go for InfluxDB, we would need something like Azure Databricks or an container running some code between the IoT-Hub and the InfluxDB. Where Databricks is way more expensive just for this workshop. We could also choose for Cosmos DB, which also supports timeseries. However Grafana doesn't support it. Besides that I have more experience with SQL.
