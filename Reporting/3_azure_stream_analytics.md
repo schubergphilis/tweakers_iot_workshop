@@ -162,6 +162,3 @@ Now let's try to start the job again! It should start now...(if it doesn't pleas
 
 Congratulations Data from the sensors should come through to SQL Server now.
 
-### Why we chose SQL Server as Output
-As we are going to use Grafana to visualize the data, the more obvious choise would be an InfluxDB or something like that. However Azure Stream Analytics does not support InfluxDB as an output.
-If we would want to go for InfluxDB, we would need something like Azure Databricks or an container running some code between the IoT-Hub and the InfluxDB. Where Databricks is way more expensive just for this workshop. We could also choose for Cosmos DB, which also supports timeseries. However Grafana doesn't support it. Besides that I have more experience with SQL.
