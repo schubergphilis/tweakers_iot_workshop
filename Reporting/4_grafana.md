@@ -1,5 +1,5 @@
 # Step 4: Create a Dashboard in Grafana
-For this part of the workshop we will use Grafana to create a nice dashboard of the data that has been stored in the Sql database. Grafana is an open source dashboarding tool. 
+For this part of the workshop we will use Grafana to create a nice dashboard of the data that has been stored in the Sql database. Grafana is an open source dashboarding tool. Unfortunately your Grafana instance does not have Persistent Storage (Microsoft did some last minute changes to azure containers and blob storage). So Whenever the Application Stops, your dashboard is destroyed.
 
 ## Finding your credentials
 For each workshop attendee there is a grafana instance pre-deployed. You can reach it on https://twkrs-XXX-graf.azurewebsites.net where XXX should be replaced with the number that was assigned to you (and your resource group).
