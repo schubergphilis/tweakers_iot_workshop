@@ -3,7 +3,7 @@
 -- beta-bl8 = alchololic beer
 -- gamma-bl8 =  non-alcoholic beer
 
--- This query returns a time series that shows the remaining volumen in the keg over a certain time period.
+-- This query returns a time series that shows the remaining volume in the keg over a certain time period.
 
 SELECT
   $__timeEpoch([time]),
