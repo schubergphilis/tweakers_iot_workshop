@@ -4,7 +4,7 @@ SELECT
     data.[keg_temperature].value as keg_temperature,
     data.[keg_volume].value as keg_volume,
     data.[air_pressure].value as air_pressure,
-    time,
+    EventEnqueuedUtcTime as time,
     device_name
 INTO BierTemperature
 FROM BierIN
@@ -29,7 +29,7 @@ SELECT
     data.[motor1].value as motor1,
     data.[motor2].value as motor2,
     data.[cooling_comp].value as cooling_comp,
-    time,
+    EventEnqueuedUtcTime as time,
     device_name
 INTO BierIOStat
 FROM BierIN
@@ -98,8 +98,9 @@ SELECT
 	data.[total_time_keg_light] as [total_time_keg_light],
 	data.[unlocking1_refusals_by_current_limit_cut_off] as [unlocking1_refusals_by_current_limit_cut_off],
 	data.[unlocking2_refusals_by_current_limit_cut_off] as [unlocking2_refusals_by_current_limit_cut_off],
-	time,
+	EventEnqueuedUtcTime as time,
 	device_name
 INTO BierRall
 FROM BierIN
 WHERE event_type='rall'
+

@@ -25,8 +25,8 @@ CREATE TABLE [dbo].[BeerIOStat](
 	[temp_gauge_backlight] [varchar](50) NULL,
 	[volume_gauge_alert] [varchar](50) NULL,
 	[volume_gauge_backlight] [varchar](50) NULL,
-	[EventEnqueuedUtcTime] [datetime] NULL,
-	[ConnectionDeviceId] [varchar](50) NULL,
+	[time] [datetime] NULL,
+	[device_name] [varchar](50) NULL,
  CONSTRAINT [PK_BierIOStat] PRIMARY KEY CLUSTERED 
 (
 	[MessageID] ASC
@@ -126,8 +126,8 @@ CREATE TABLE [dbo].[BeerRall](
 	[total_time_keg_light] [nchar](10) NULL,
 	[unlocking1_refusals_by_current_limit_cut_off] [nchar](10) NULL,
 	[unlocking2_refusals_by_current_limit_cut_off] [nchar](10) NULL,
-	[EventEnqueuedUtcTime] [datetime] NULL,
-	[ConnectionDeviceId] [varchar](50) NULL,
+	[time] [datetime] NULL,
+	[device_name] [varchar](50) NULL,
  CONSTRAINT [PK_BierRall] PRIMARY KEY CLUSTERED 
 (
 	[MessageID] ASC
@@ -149,8 +149,8 @@ CREATE TABLE [dbo].[BeerTemperature](
 	[bowl_temperature] [decimal](10, 2) NULL,
 	[keg_temperature] [decimal](10, 2) NULL,
 	[keg_volume] [decimal](10, 2) NULL,
-	[EventEnqueuedUtcTime] [datetime] NULL,
-	[ConnectionDeviceId] [varchar](50) NULL,
+	[time] [datetime] NULL,
+	[device_name] [varchar](50) NULL,
  CONSTRAINT [PK_BierTemperature] PRIMARY KEY CLUSTERED 
 (
 	[MessageID] ASC
