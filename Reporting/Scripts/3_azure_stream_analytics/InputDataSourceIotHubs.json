@@ -1,0 +1,22 @@
+{
+  "name": "BeerIN",
+  "properties": {
+    "type": "stream",
+    "serialization": {
+      "type": "JSON",
+      "properties": {
+        "encoding": "UTF8"
+      }
+    },
+    "datasource": {
+      "type": "Microsoft.Devices/IotHubs",
+      "properties": {
+        "iotHubNamespace": "<iothubname>",
+        "sharedAccessPolicyName": "iothubowner",
+        "sharedAccessPolicyKey": "<sharedAccessPolicyKey>",
+        "consumerGroupName": "<consumergroupname>",
+        "endpoint": "messages/events"
+      }
+    }
+  }
+}

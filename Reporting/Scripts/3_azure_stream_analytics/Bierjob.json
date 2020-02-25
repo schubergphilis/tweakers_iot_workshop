@@ -1,0 +1,154 @@
+{
+  "properties": {
+    "sku": {
+      "name": "Standard"
+    },
+    "jobId": "e6fab94d-c30b-42ad-b834-c06fd05344c9",
+    "provisioningState": "Succeeded",
+    "jobState": "Stopped",
+    "outputStartMode": "JobStartTime",
+    "outputStartTime": "2020-02-24T11:05:07.957Z",
+    "eventsOutOfOrderPolicy": "Adjust",
+    "outputErrorPolicy": "Stop",
+    "eventsOutOfOrderMaxDelayInSeconds": 0,
+    "eventsLateArrivalMaxDelayInSeconds": 5,
+    "dataLocale": "en-US",
+    "compatibilityLevel": "1.1",
+    "createdDate": "2020-01-22T15:22:11.337Z",
+    "inputs": [
+      {
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.Devices/IotHubs",
+            "properties": {
+              "iotHubNamespace": "dev-heinekenblade-iot-t6lt6",
+              "sharedAccessPolicyName": "iothubowner",
+              "consumerGroupName": "bierjob",
+              "endpoint": "messages/events"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "encoding": "UTF8"
+            }
+          },
+          "etag": "e95e61d7-d196-4c0f-9128-6b66120e5895"
+        },
+        "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob/inputs/BierIN",
+        "name": "BierIN",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs"
+      }
+    ],
+    "transformation": {
+      "properties": {
+        "streamingUnits": 1,
+        "query": "SELECT\r\n\tdata.[amb_temperature].value as amb_temperature,\r\n    data.[bowl_temperature].value as bowl_temperature,\r\n    data.[keg_temperature].value as keg_temperature,\r\n    data.[keg_volume].value as keg_volume,\r\n    data.[air_pressure].value as air_pressure,\r\n    EventEnqueuedUtcTime as time,\r\n    device_name\r\nINTO BierTemperature\r\nFROM BierIN\r\nWHERE event_type='temperature'\r\n\r\nSELECT \r\n    data.[locking1_detect_sw].value as locking1_detect_sw,\r\n    data.[locking1_open_sw].value as locking1_open_sw,\r\n    data.[air_pump].value as air_pump,\r\n    data.[cooling_fan_run].value as cooling_fan_run,\r\n    data.[locking2_detect_sw].value as locking2_detect_sw,\r\n    data.[cooling_fan_ls].value as cooling_fan_ls,\r\n    data.[temp_gauge_alert].value as temp_gauge_alert,\r\n    data.[temp_gauge_backlight].value as temp_gauge_backlight,\r\n    data.[keg_locking_led].value as keg_locking_led,\r\n    data.[volume_gauge_backlight].value as volume_gauge_backlight,\r\n    data.[cooling_fan_hs].value as cooling_fan_hs,\r\n    data.[locking2_open_sw].value as locking2_open_sw,\r\n    data.[air_pump_speed].value as air_pump_speed,\r\n    data.[volume_gauge_alert].value as volume_gauge_alert,\r\n    data.[defrost_coil].value as defrost_coil,\r\n    data.[motor1].value as motor1,\r\n    data.[motor2].value as motor2,\r\n    data.[cooling_comp].value as cooling_comp,\r\n    EventEnqueuedUtcTime as time,\r\n    device_name\r\nINTO BierIOStat\r\nFROM BierIN\r\nWHERE event_type='iostat'\r\n\r\nSELECT \r\n\tdata.[cooling_compressor_stop] as [cooling_compressor_stop],\r\n\tdata.[cooling_fan_stop] as [cooling_fan_stop],\r\n\tdata.[c1_last_2l_timer] as [c1_last_2l_timer],\r\n\tdata.[c1_time_max] as [c1_time_max],\r\n\tdata.[c2_last_2l_timer] as [c2_last_2l_timer],\r\n\tdata.[c2_time_max] as [c2_time_max],\r\n\tdata.[c3_last_2l_timer] as [c3_last_2l_timer],\r\n\tdata.[c3_time_max] as [c3_time_max],\r\n\tdata.[calculated_total_volume] as [calculated_total_volume],\r\n\tdata.[cooling_compressor_high_limit] as [cooling_compressor_high_limit],\r\n\tdata.[cooling_compressor_low_limit] as [cooling_compressor_low_limit],\r\n\tdata.[cooling_fan_speed] as [cooling_fan_speed],\r\n\tdata.[current_keg_volume] as [current_keg_volume],\r\n\tdata.[cuton_sensor] as [cuton_sensor],\r\n\tdata.[debug_ambient] as [debug_ambient],\r\n\tdata.[debug_fan_speed_adjust] as [debug_fan_speed_adjust],\r\n\tdata.[display_debug_information_pdebug] as [display_debug_information_pdebug],\r\n\tdata.[fan_pwm] as [fan_pwm],\r\n\tdata.[pump_stop_work_time] as [pump_stop_work_time],\r\n\tdata.[fuzy_cc_off] as [fuzy_cc_off],\r\n\tdata.[fuzy_cc_on] as [fuzy_cc_on],\r\n\tdata.[keg_empty_waiting_time] as [keg_empty_waiting_time],\r\n\tdata.[keg_half_waiting_time] as [keg_half_waiting_time],\r\n\tdata.[keg_locking_buf] as [keg_locking_buf],\r\n\tdata.[keg_unlocking_buf] as [keg_unlocking_buf],\r\n\tdata.[last_2l_warmup] as [last_2l_warmup],\r\n\tdata.[light_brightnes_duty_value] as [light_brightnes_duty_value],\r\n\tdata.[locking1_refusals_by_current_limit_cut_off as [locking1_refusals_by_current_limit_cut_off],\r\n\tdata.[locking2_refusals_by_current_limit_cut_off] as [locking2_refusals_by_current_limit_cut_off],\r\n\tdata.[main_frequency] as [main_frequency],\r\n\tdata.[max_ambient] as [max_ambient],\r\n\tdata.[max_air_value] as [max_air_value],\r\n\tdata.[max_air_pump_speed] as [max_air_pump_speed],\r\n\tdata.[max_rpm_pwm_fan] as [max_rpm_pwm_fan],\r\n\tdata.[measured_sensor_pressure] as [measured_sensor_pressure],\r\n\tdata.[min_ambient] as [min_ambient],\r\n\tdata.[min_air_value] as [min_air_value],\r\n\tdata.[min_rpm_pwmfan] as [min_rpm_pwmfan],\r\n\tdata.[minimum_cooling_running_time] as [minimum_cooling_running_time],\r\n\tdata.[minimum_cooling_stop_time] as [minimum_cooling_stop_time],\r\n\tdata.[minimum_fan_running_time] as [minimum_fan_running_time],\r\n\tdata.[printf_display_air] as [printf_display_air],\r\n\tdata.[printf_display_final_tester_data] as [printf_display_final_tester_data],\r\n\tdata.[printf_display_temp] as [printf_display_temp],\r\n\tdata.[pump_run_work_time] as [pump_run_work_time],\r\n\tdata.[snr] as [snr],\r\n\tdata.[smart_keg_start_temperature] as [smart_keg_start_temperature],\r\n\tdata.[state_locking] as [state_locking],\r\n\tdata.[tapping_cycle] as [tapping_cycle],\r\n\tdata.[temperature_defrost_volume] as [temperature_defrost_volume],\r\n\tdata.[temperature_regulation_time] as [temperature_regulation_time],\r\n\tdata.[tests_light_brightnes_duty_value] as [tests_light_brightnes_duty_value],\r\n\tdata.[third_pump_stop_work_time] as [third_pump_stop_work_time],\r\n\tdata.[total_count_compressor] as [total_count_compressor],\r\n\tdata.[total_count_defrost_coil] as [total_count_defrost_coil],\r\n\tdata.[total_count_locking1] as [total_count_locking1],\r\n\tdata.[total_count_locking2] as [total_count_locking2],\r\n\tdata.[total_time_defrost_coil] as [total_time_defrost_coil],\r\n\tdata.[total_time_air_pump] as [total_time_air_pump],\r\n\tdata.[total_time_keg_light] as [total_time_keg_light],\r\n\tdata.[unlocking1_refusals_by_current_limit_cut_off] as [unlocking1_refusals_by_current_limit_cut_off],\r\n\tdata.[unlocking2_refusals_by_current_limit_cut_off] as [unlocking2_refusals_by_current_limit_cut_off],\r\n\tEventEnqueuedUtcTime as time,\r\n\tdevice_name\r\nINTO BierRall\r\nFROM BierIN\r\nWHERE event_type='rall'\r\n\r\n\r\nSELECT\r\n\tdata.[state] as state,\r\n    data.[status] as status,\r\n    data.[duration] as duration,\r\n    EventEnqueuedUtcTime as time,\r\n    device_name\r\nINTO BeerPouringArchive\r\nFROM BierIN\r\nWHERE event_type='pouring'\r\n\r\nSELECT\r\n\tdata.[state] as state,\r\n    data.[status] as status,\r\n    data.[duration] as duration,\r\n    EventEnqueuedUtcTime as time,\r\n    device_name\r\nINTO BeerPouringLive\r\nFROM BierIN\r\nWHERE event_type='pouring'\r\n",
+        "etag": "7fbb313e-47ca-421f-a8cb-daf3dcf55def"
+      },
+      "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob/transformations/Transformation",
+      "name": "Transformation",
+      "type": "Microsoft.StreamAnalytics/streamingjobs/transformations"
+    },
+    "outputs": [
+      {
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Sql/Server/Database",
+            "properties": {
+              "server": "tweakers-sql.database.windows.net",
+              "database": "tweakers-db",
+              "user": "edeboer",
+              "table": "BeerPouring"
+            }
+          },
+          "etag": "3820a28d-7b19-4a94-875b-39a2313d4af7"
+        },
+        "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob/outputs/BeerPouringArchive",
+        "name": "BeerPouringArchive",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs"
+      },
+      {
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/Queue",
+            "properties": {
+              "serviceBusNamespace": "tweakers",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey",
+              "queueName": "beer",
+              "propertyColumns": []
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "encoding": "UTF8",
+              "format": "LineSeparated"
+            }
+          },
+          "etag": "f4eb6320-89f3-482d-88f1-b016f88c97dc"
+        },
+        "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob/outputs/BeerPouringLive",
+        "name": "BeerPouringLive",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs"
+      },
+      {
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Sql/Server/Database",
+            "properties": {
+              "server": "tweakers-sql.database.windows.net",
+              "database": "tweakers-db",
+              "user": "edeboer",
+              "table": "BeerIOStat"
+            }
+          },
+          "etag": "3b4e6ba8-aeb7-464a-a462-5cdfa11b8a0a"
+        },
+        "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob/outputs/BierIOStat",
+        "name": "BierIOStat",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs"
+      },
+      {
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Sql/Server/Database",
+            "properties": {
+              "server": "tweakers-sql.database.windows.net",
+              "database": "tweakers-db",
+              "user": "edeboer",
+              "table": "BeerRall"
+            }
+          },
+          "etag": "bd1eeac7-07e9-4d9e-9f8e-0f44bacc7a95"
+        },
+        "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob/outputs/BierRall",
+        "name": "BierRall",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs"
+      },
+      {
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Sql/Server/Database",
+            "properties": {
+              "server": "tweakers-sql.database.windows.net",
+              "database": "tweakers-db",
+              "user": "edeboer",
+              "table": "BeerTemperature"
+            }
+          },
+          "etag": "560c676f-1aac-422d-aee8-7159c4cd23a7"
+        },
+        "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob/outputs/BierTemperature",
+        "name": "BierTemperature",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs"
+      }
+    ],
+    "functions": []
+  },
+  "id": "/subscriptions/004164f2-1c28-44aa-882e-3dfd3bd634e0/resourceGroups/edeBoer-tst/providers/Microsoft.StreamAnalytics/streamingjobs/Bierjob",
+  "name": "Bierjob",
+  "type": "Microsoft.StreamAnalytics/streamingjobs",
+  "location": "West Europe"
+}

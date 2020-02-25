@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "datasource": {
+      "type": "Microsoft.Sql/Server/Database",
+      "properties": {
+        "server": "<servername>.database.windows.net",
+        "database": "tweakers_db",
+        "user": "<sqlusername>",
+        "password": "<sqlpassword>",
+        "table": "<tablename>"
+      }
+    },
+    "serialization": {
+      "type": "Json",
+      "properties": {
+        "encoding": "UTF8",
+        "format": "LineSeparated"
+      }
+    }
+  },
+  "name": "<outputname>"
+}

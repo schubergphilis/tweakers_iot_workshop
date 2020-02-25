@@ -15,7 +15,7 @@ What services in Azure are Used:
 
 
 ## Setup per table
-Each Table has its own resource group with all the per-table shared azure resources (e.g. IoTHub and Grafana)
+Each Table has its own resource group with the per-table shared azure resources (e.g. IoTHub)
 You can find credentials that you can use to login to portal.azure.com on each table.
 Please do not deploy additional IoT Hubs, as they won't be able to receive data from the Beer taps. Each deployed IoT Hub needs to be configured on the Beer Taps and the ones we deployed have been configured on our Beer Taps.
 

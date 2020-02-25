@@ -1,0 +1,27 @@
+{
+  "Jobs": [
+    {
+      "Name": "Bierjob",
+      "Datasources": [
+        {
+          "Name": "BierIN"
+        },
+        {
+          "Name": "BeerPouringArchive"
+        },
+        {
+          "Name": "BeerPouringLive"
+        },
+        {
+          "Name": "BierIOStat"
+        },
+        {
+          "Name": "BierRall"
+        },
+        {
+          "Name": "BierTemperature"
+        }
+      ]
+    }
+  ]
+}

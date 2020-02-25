@@ -1,6 +1,6 @@
 # Step 1: IoT Hub Deployment and Configuration
 
-For this workshop we have already deployed an IoT Hub in Azure for each table in the room. We pre-deployed the IoT Hub, because deploying it in Azure can take a long time.
+For this workshop we have already deployed an IoT Hub in Azure for each table in the room. We pre-deployed the IoT Hub, because deploying it in Azure can take some time.
 
 ## Configuration of the IoT Hub
 
