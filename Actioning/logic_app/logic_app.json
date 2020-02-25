@@ -1,0 +1,141 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "HTTP": {
+                "inputs": {
+                    "method": "GET",
+                    "queries": {
+                        "colour": "@variables('colour')",
+                        "name": "alderaan"
+                    },
+                    "uri": "https://sbphuelight.azurewebsites.net/setlight"
+                },
+                "runAfter": {
+                    "Post_message": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Http"
+            },
+            "Initialize_variable": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "colour",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "Post_message": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['slack']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/chat.postMessage",
+                    "queries": {
+                        "channel": "#azure-iot",
+                        "text": "@base64ToString(triggerBody()?['ContentData'])"
+                    }
+                },
+                "runAfter": {
+                    "Switch": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
+            "Switch": {
+                "cases": {
+                    "Case": {
+                        "actions": {
+                            "Set_variable": {
+                                "inputs": {
+                                    "name": "colour",
+                                    "value": "green"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "case": "gamma-bl8"
+                    },
+                    "Case_2": {
+                        "actions": {
+                            "Set_variable_2": {
+                                "inputs": {
+                                    "name": "colour",
+                                    "value": "red"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "case": "beta-bl8"
+                    }
+                },
+                "default": {
+                    "actions": {}
+                },
+                "expression": "@json(base64ToString(triggerBody()?['ContentData'])).device_name",
+                "runAfter": {
+                    "Initialize_variable": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Switch"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_message_is_received_in_a_queue_(auto-complete)": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['servicebus']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('Beer'))}/messages/head",
+                    "queries": {
+                        "queueType": "Main"
+                    }
+                },
+                "recurrence": {
+                    "frequency": "Second",
+                    "interval": 3
+                },
+                "type": "ApiConnection"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "servicebus": {
+                    "connectionId": "/subscriptions/X/resourceGroups/rg-tst/providers/Microsoft.Web/connections/servicebus",
+                    "connectionName": "servicebus",
+                    "id": "/subscriptions/X/providers/Microsoft.Web/locations/westeurope/managedApis/servicebus"
+                },
+                "slack": {
+                    "connectionId": "/subscriptions/X/resourceGroups/rg-tst/providers/Microsoft.Web/connections/slack",
+                    "connectionName": "slack",
+                    "id": "/subscriptions/X/providers/Microsoft.Web/locations/westeurope/managedApis/slack"
+                }
+            }
+        }
+    }
+}

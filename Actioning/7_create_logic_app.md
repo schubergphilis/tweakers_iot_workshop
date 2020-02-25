@@ -112,4 +112,6 @@ We will create a Logic App for that. A Locig App is a small workflow like applic
 
 28. Save the Logic App Again. In theory if you did everything correctly, you would now see some light bulbs change colour when I tap a beer. (if nothing happens make sure your Logic App is enabled)
 
+The JSON Code of the Logic App (how it should be) can be found in the *logic_app* directory in the file **logic_app.json**. If you are using this one, make sure to change/remove/recreate the parameters for the Service Bus Queue and Slack integration starting on Line 125.
+
 This is the end of the workshop. Feel free to play around some more with the Grafana/Lights/Slack/Logic App etc.
