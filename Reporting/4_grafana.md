@@ -1,5 +1,5 @@
 # Step 4: Create a Dashboard in Grafana
-For this part of the workshop we will use Grafana to create a nice dashboard of the data that has been stored in the Sql database. Grafana is an open source dashboarding tool. 
+For this part of the workshop we will use Grafana to create a nice dashboard of the data that has been stored in the Sql database. Grafana is an open source dashboarding tool. Unfortunately your Grafana instance does not have Persistent Storage (Microsoft did some last minute changes to azure containers and blob storage). So Whenever the Application Stops, your dashboard is destroyed.
 
 ## Finding your credentials
 For each workshop attendee there is a grafana instance pre-deployed. You can reach it on https://twkrs-XXX-graf.azurewebsites.net where XXX should be replaced with the number that was assigned to you (and your resource group).
@@ -89,3 +89,60 @@ To clone a gauge perform the following actions:
 5. Modify the query and if needed settings to your liking. Queries can be found in the SQL directory and are prefixed with "*grafana_*".
 
 ## Adding a Graph for Keg volume over time
+
+Let's do something else than a Gauge, let's see how the Beer volume in the keg is behaving over tie.
+1. Click on **Add Panel**
+2. Click on **Add Query**
+
+![Grafana](img/graf_add_panel.jpg)
+
+3. From the dropdownbox select the correct DataSource (*TweakersDB* if you followed the earlier suggestion).
+4. Copy the query from *grafana_keg_volume_over_time.sql* and paste it in the query field.
+5. For the Format select **Time Series**.
+
+![Grafana](img/graf_beer_over_time.jpg)
+
+6. Click on the Graph icon 
+
+![Grafana](img/graf_visualization_button.jpg)
+
+7. Now change the following options in the top options box (leave the others default):
+    * **FIll**: 1
+
+8. Now change the following options in the Axes options box (leave the others default):
+    * **Left Y - Unit**: Volume -> Millilitre (mL)
+    * **Label**: Remaining Beer
+    * **Right Y - Show**: disabled
+9. Now change the following options in the Legend options box (leave the others default):
+    * **Values - Min**: Enabled
+    * **Values - Max**: Enabled
+    * **Values - Current**: Enabled
+
+![Grafana](img/graf_beer_over_time_settings.jpg)
+
+10. If your Stream Analytics job is still running you should now see data coming into your graph (assuming it is still refreshing every 5 secs)
+11. You could also change the name of the Panel in the General Settings menu.
+
+![Grafana](img/graf_general_settings.jpg)
+
+
+## Example dashboard
+If you inherited the same names that we suggested during the whole course you can also use our sample dashboard.
+
+The JSON source of the dashboard can be found in the folder Grafana in the file *sample_dashboard.json*.
+
+To Load it create either a new dashboard or modify the one you already created.
+To insert the JSON user the following steps:
+1. Click on the little gear icon to go to **Dashboard Settings**
+
+![Grafana](img/graf_dashboard_settings.jpg)
+
+2. Click on **JSON Model**.
+3. Paste the content of the *sample_dashboard.json* over the existing JSON code.
+4. Click on **Save changes**
+
+
+Congratulations you should now have setup a near realtime dashboard in Grafana. :)
+
+
+*reminder this is not neccesarily setup according to best practices. Please feel free to give your feedback or ideas on how we can improve this workshop.

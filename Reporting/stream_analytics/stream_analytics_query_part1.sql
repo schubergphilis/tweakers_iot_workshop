@@ -6,8 +6,8 @@ SELECT
     data.[air_pressure].value as air_pressure,
     EventEnqueuedUtcTime as time,
     device_name
-INTO BierTemperature
-FROM BierIN
+INTO BeerTemperature
+FROM BeerIN
 WHERE event_type='temperature'
 
 SELECT 
@@ -31,8 +31,8 @@ SELECT
     data.[cooling_comp].value as cooling_comp,
     EventEnqueuedUtcTime as time,
     device_name
-INTO BierIOStat
-FROM BierIN
+INTO BeerIOStat
+FROM BeerIN
 WHERE event_type='iostat'
 
 SELECT 
@@ -100,7 +100,7 @@ SELECT
 	data.[unlocking2_refusals_by_current_limit_cut_off] as [unlocking2_refusals_by_current_limit_cut_off],
 	EventEnqueuedUtcTime as time,
 	device_name
-INTO BierRall
-FROM BierIN
+INTO BeerRall
+FROM BeerIN
 WHERE event_type='rall'
 

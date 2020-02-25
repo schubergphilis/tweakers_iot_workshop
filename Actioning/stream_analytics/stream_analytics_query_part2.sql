@@ -8,7 +8,7 @@ SELECT
     EventEnqueuedUtcTime as time,
     device_name
 INTO BeerPouringArchive
-FROM BierIN
+FROM BeerIN
 WHERE event_type='pouring'
 
 SELECT
@@ -18,5 +18,5 @@ SELECT
     EventEnqueuedUtcTime as time,
     device_name
 INTO BeerPouringLive
-FROM BierIN
+FROM BeerIN
 WHERE event_type='pouring'
