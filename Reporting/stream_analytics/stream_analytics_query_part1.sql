@@ -63,7 +63,7 @@ SELECT
 	data.[keg_unlocking_buf] as [keg_unlocking_buf],
 	data.[last_2l_warmup] as [last_2l_warmup],
 	data.[light_brightnes_duty_value] as [light_brightnes_duty_value],
-	data.[locking1_refusals_by_current_limit_cut_off as [locking1_refusals_by_current_limit_cut_off],
+	data.[locking1_refusals_by_current_limit_cut_off] as [locking1_refusals_by_current_limit_cut_off],
 	data.[locking2_refusals_by_current_limit_cut_off] as [locking2_refusals_by_current_limit_cut_off],
 	data.[main_frequency] as [main_frequency],
 	data.[max_ambient] as [max_ambient],
