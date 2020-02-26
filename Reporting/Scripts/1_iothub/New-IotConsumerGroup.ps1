@@ -1,8 +1,24 @@
-#! /bin/env pwsh
+<#
+        .SYNOPSIS
+        Helper script for IoT Hub Configuration.
+        .PARAMETER Username
+        Event Azure username assigned (tweaker-###) does not need the @...
+        .PARAMETER consumerGroupName
+        Name of the IOT EventHub ConsumerGroup that you want to add.
+        .EXAMPLE
+        ./New-IotConsumerGroup.ps1 -username tweaker-001 -consumerGroupName myConsumerGroup
+        .LINK
+        https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/1_iothub.md
+#>
 Param (
-    $username,
-    $consumerGroupName
+    [Parameter(Mandatory)]
+    [ValidatePattern({^tweaker-\d{3}$},ErrorMessage = "{0} is not a valid username")]
+    [string]$username,
+    [Parameter(Mandatory)]
+    [string]$consumerGroupName
 )
+
+$ErrorActionPreference = 'Stop'
 
 function New-AzureLogin() {
     $context = Get-AzContext
@@ -13,11 +29,13 @@ function New-AzureLogin() {
 
 New-AzureLogin
 
-$location = "West Europe"
+if ($username.contains('@')) {
+    $username = $username.split('@')[0]
+}
 
 $sequence = $username.split('-')[1]
 $IotHubNumer = [Math]::Round([Math]::Ceiling($sequence / 5))
-$resourceGroupName =  'lab001-weu-mgmt-iot-rsg-{0:000}' -f $IotHubNumer
+$resourceGroupName = 'lab001-weu-mgmt-iot-rsg-{0:000}' -f $IotHubNumer
 $IotHubName = 'twkrs-{0:000}-iot-hub' -f $IotHubNumer
 
 $IotHubParams = @{
@@ -27,6 +45,11 @@ $IotHubParams = @{
 
 $AzIotHub = Get-AzIotHub @IotHubParams
 if ([String]::IsNullOrEmpty($AzIotHub) -eq $false) {
-        Add-AzIotHubEventHubConsumerGroup -ResourceGroupName $resourceGroupName -Name $IotHubName `
-            -EventHubConsumerGroupName $consumerGroupName | Out-null
+    $IotHubEventHubConsumerGroup = Add-AzIotHubEventHubConsumerGroup -ResourceGroupName $resourceGroupName -Name $IotHubName `
+        -EventHubConsumerGroupName $consumerGroupName
 }
+
+$ConsumerGroup = $IotHubEventHubConsumerGroup | Where-Object { $_.Name -eq $consumerGroupName }
+
+Write-Host Consumergroup $ConsumerGroup.Name created on $IotHubName
+

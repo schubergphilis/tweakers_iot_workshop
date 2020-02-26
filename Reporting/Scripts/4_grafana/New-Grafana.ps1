@@ -1,7 +1,20 @@
-#! /bin/env pwsh
+<#
+        .SYNOPSIS
+        Helper script for creating the Grafana webapp
+        .PARAMETER Username
+        Event Azure username assigned (tweaker-###) does not need the @...
+        .EXAMPLE
+        ./New-Grafana.ps1 -username tweaker-001
+        .LINK
+        https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Reporting/4_grafana.md
+#>
 Param (
-    $username
+    [Parameter(Mandatory)]
+    [ValidatePattern({^tweaker-\d{3}$},ErrorMessage = "{0} is not a valid username")]
+    [string]$username
 )
+
+$ErrorActionPreference = 'Stop'
 
 function New-AzureLogin()
 {
@@ -10,19 +23,6 @@ function New-AzureLogin()
     if (!$context)
     {
         Connect-AzAccount
-    }
-}
-
-function Write-Keyvault {
-    Param (
-        $secretName,
-        $secretValue,
-        $keyvaultName
-    )
-    $keyvault = Get-AzKeyVault -VaultName $KeyVaultName
-    if (![String]::IsNullOrEmpty($keyvault) -eq $true) {
-        Set-AzKeyVaultSecret -VaultName $KeyVaultName -Name $secretName -SecretValue (ConvertTo-SecureString -String $secretValue -AsPlainText -Force) |
-            Out-Null
     }
 }
 
@@ -87,9 +87,6 @@ $AppConfig = @{
 }
 
 Set-AzWebApp @AppConfig | Out-Null
-
-Write-Keyvault -keyvaultName $keyvaultName -secretName ("{0}-password" -f $appServiceName) -secretValue $grafanaPassword
-Write-Keyvault -keyvaultName $keyvaultName -secretName ("{0}-address" -f $appServiceName) -secretValue ("https://{0}" -f $webApp.DefaultHostName)
 
 Write-Host Grafana password is: $grafanaPassword
 Write-Host Grafana address is: https://$($webApp.DefaultHostName)
