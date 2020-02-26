@@ -45,7 +45,7 @@ CREATE TABLE [dbo].[BeerPouring](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[state] [varchar](50) NULL,
 	[status] [varchar](50) NULL,
-	[duration] [int] NULL,
+	[duration] [decimal](16, 2) NULL,
 	[time] [datetime] NULL,
 	[device_name] [varchar](50) NULL,
  CONSTRAINT [PK_BeerPouring] PRIMARY KEY CLUSTERED 
