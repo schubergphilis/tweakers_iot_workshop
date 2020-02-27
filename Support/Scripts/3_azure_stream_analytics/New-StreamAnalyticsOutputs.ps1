@@ -18,8 +18,8 @@ Param (
     [Parameter(Mandatory)]
     [ValidatePattern({^tweaker-\d{3}$},ErrorMessage = "{0} is not a valid username")]
     [string]$username,
-    [Parameter(Mandatory)]
-    [string]$JobName,
+    [Parameter(Mandatory=$false)]
+    [string]$JobName = 'BeerJob',
     [Parameter(Mandatory=$false)]
     [string]$sqluser = $userName,
     [Parameter(Mandatory)]
@@ -47,9 +47,15 @@ $Sequence = $username.split('-')[-1]
 $ResourceGroupName =  'lab001-weu-mgmt-twkrs-rsg-{0:000}' -f $Sequence
 $sqlServerName = 'twkrs-{0:000}-sql' -f $Sequence
 
+$StreamAnalyticsJob = Get-AzStreamAnalyticsJob -ResourceGroupName $ResourceGroupName -Name $JobName -ErrorAction SilentlyContinue
+if ([String]::IsNullOrEmpty($StreamAnalyticsJob) -eq $true) {
+    Write-Error "Create a Azure StreamAnalyticsJob first!"
+    exit
+}
+
 $Outputs = @('BeerIOStat','BeerRall','BeerTemperature')
 foreach ($OutputName in $Outputs) {
-    $OutputObject = (Get-Content (Join-Path $scriptDirectory 'OutputDatabase.json') | ConvertFrom-Json)
+    $OutputObject = (Get-Content (Join-Path $scriptDirectory 'json/OutputDatabase.json') | ConvertFrom-Json)
     $OutputObject.name = $OutputName
     $OutputObject.properties.datasource.properties.server = ('{0}.database.windows.net' -f $sqlServerName)
     $OutputObject.properties.datasource.properties.user = $sqluser
@@ -59,10 +65,13 @@ foreach ($OutputName in $Outputs) {
     $TempInputFile = New-TemporaryFile
     $OutputObject | ConvertTo-Json -Depth 25 -Compress > $TempInputFile
 
-    New-AzureRmStreamAnalyticsOutput -ResourceGroupName $ResourceGroupName -File $TempInputFile -JobName $jobName -Name $OutputName -Force
+    New-AzureRmStreamAnalyticsOutput -ResourceGroupName $ResourceGroupName -File $TempInputFile -JobName $jobName -Name $OutputName -Force | Out-Null
 
     Remove-Item $TempInputFile
     Clear-Variable OutputObject
 }
 
-New-AzStreamAnalyticsTransformation -ResourceGroupName $ResourceGroupName -File (Join-Path $scriptDirectory "Transformation.json") -JobName $jobName -Name "Transformation"
+New-AzStreamAnalyticsTransformation -ResourceGroupName $ResourceGroupName -File (Join-Path $scriptDirectory "json/Transformation.json") -JobName $jobName -Name "Transformation" -Force | Out-Null
+
+Write-Host "Azure StreamAnalyticsJob $JobName updated with the following outputs"
+Write-Host "Outputs: $($Outputs.split(',') -join ", ")"

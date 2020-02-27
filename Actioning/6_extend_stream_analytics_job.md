@@ -10,7 +10,7 @@ The Beer Taps send what is called "Pouring" events, there are three events relat
 
 Let's store these events in the database as a cold path and add a hot path at the same time.
 1. Go back to the previously created Stream Analytics Job.
-2. Stop the Stream Analytics Job. 
+2. Stop the Stream Analytics Job.
 3. Click on **Outputs**
 
     ![Stream Analytics](img/asa_output.jpg)

@@ -1,9 +1,9 @@
 # Step 3: Create an Azure Stream Analytics Job
-We use the Azure Stream Analytics Job to read the messages that the Beer Taps send from the IoT-Hub and route them to a SQL Database. Why a Stream Analytics Job, IoT-Hub Messages have to be parsed before you can read the contents of it. This can be done with an Azure Function for example, but we chose to use a Stream Analytics Job as it is a bit easier for you guys as not everybody has a developer background.
+We use the Azure Stream Analytics Job to read the messages that the Beer Taps send from the IoT-Hub and route them to a SQL Database. Why a Stream Analytics Job? IoT-Hub Messages have to be parsed before you can read the contents of it. This can be done with an Azure Function for example, but we chose to use a Stream Analytics Job as it is a bit easier as not everybody has a developer background.
 
 Within the Stream Analytics Job we create Queries that get IoT-Hub messages, extract the JSON attribute values and insert the in a SQL database.
 
-Belowe steps use the Azure Portal UI to create the job. Off course this can also be done with an ARM template or the Azure CLI.
+Below steps use the Azure Portal UI to create the job. Off course this can also be done with an ARM template, Powershell or the Azure CLI.
 
 ## Creating the Stream Analytics Job
 1. Click on "_Create a Resource_" and search for "_Stream Analytics job_", once you found it click on **Create**

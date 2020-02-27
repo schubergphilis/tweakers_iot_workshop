@@ -40,13 +40,19 @@ $SQLServerName = "twkrs-{0:000}-sql" -f $Sequence
 $SQLCredential = New-Object -typename System.Management.Automation.PSCredential `
     -argumentlist $username, (ConvertTo-SecureString $SqlPassword -AsPlainText -Force)
 
+Write-Host Creating SQL server and Database, this can take a while ...
+
 $SqlServer = New-AzSqlServer -ServerName $SQLServerName -ResourceGroupName $ResourceGroupName -Location $location -SqlAdministratorCredentials $SQLCredential
 
-$IpAddress = & curl ifconfig.me -s
 New-AzSqlServerFirewallRule -ResourceGroupName $ResourceGroupName -ServerName $SQLServerName  `
-    -FirewallRuleName "KnockKnock" `
-    -StartIpAddress $IpAddress `
-    -EndIpAddress $IpAddress | Out-Null
+    -FirewallRuleName "SBPVisitor" `
+    -StartIpAddress '95.142.96.53' `
+    -EndIpAddress '95.142.96.53' | Out-Null
+
+New-AzSqlServerFirewallRule -ResourceGroupName $ResourceGroupName -ServerName $SQLServerName  `
+    -FirewallRuleName "SBPOffice" `
+    -StartIpAddress '195.66.90.65' `
+    -EndIpAddress '195.66.90.65' | Out-Null
 
 New-AzSqlDatabase -ResourceGroupName $ResourceGroupName -ServerName $SQLServerName `
     -DatabaseName 'tweakers_db' `

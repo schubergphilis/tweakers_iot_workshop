@@ -1,6 +1,17 @@
-#! /bin/env pwsh
+<#
+        .SYNOPSIS
+        Helper script for creating the Service bus queue
+        .PARAMETER Username
+        Event Azure username assigned (tweaker-###) does not need the @...
+        .EXAMPLE
+        ./New-ServiceBusQueue.ps1 -username tweaker-001
+        .LINK
+        https://github.com/schubergphilis/tweakers_iot_workshop/blob/master/Actioning/5_create_servicebus_queue.md
+#>
 Param (
-    $username
+    [Parameter(Mandatory)]
+    [ValidatePattern({^tweaker-\d{3}$},ErrorMessage = "{0} is not a valid username")]
+    [string]$username
 )
 
 $ErrorActionPreference = 'Stop'

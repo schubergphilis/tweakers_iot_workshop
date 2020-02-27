@@ -16,8 +16,8 @@ Param (
     [Parameter(Mandatory)]
     [ValidatePattern({^tweaker-\d{3}$},ErrorMessage = "{0} is not a valid username")]
     [string]$username,
-    [Parameter(Mandatory)]
-    [string]$JobName,
+    [Parameter(Mandatory=$false)]
+    [string]$JobName = 'BeerJob',
     [Parameter(Mandatory)]
     [string]$consumerGroupName
 )
@@ -45,7 +45,7 @@ $IotHubName = 'twkrs-{0:000}-iot-hub' -f $IotHubNumber
 $IotHubResourceGroupName =  'lab001-weu-mgmt-iot-rsg-{0:000}' -f $IotHubNumber
 $ResourceGroupName =  'lab001-weu-mgmt-twkrs-rsg-{0:000}' -f $IotHubNumber
 
-$JobObject = (Get-Content (Join-Path $scriptDirectory 'Job.json') | ConvertFrom-Json)
+$JobObject = (Get-Content (Join-Path $scriptDirectory 'json/Job.json') | ConvertFrom-Json)
 
 $IotHubParams = @{
     ResourceGroupName = $IotHubResourceGroupName
@@ -53,7 +53,7 @@ $IotHubParams = @{
 }
 $AzIotHubPrimaryKey = (Get-AzIotHubKey @IotHubParams -KeyName "iothubowner").PrimaryKey
 
-$InputObject = (Get-Content (Join-Path $scriptDirectory 'InputDataSourceIotHubs.json') | ConvertFrom-Json)
+$InputObject = (Get-Content (Join-Path $scriptDirectory 'json/InputDataSourceIotHubs.json') | ConvertFrom-Json)
 $InputObject.properties.datasource.properties.iotHubNamespace = $IotHubName
 $InputObject.properties.datasource.properties.sharedAccessPolicyKey = $AzIotHubPrimaryKey
 $InputObject.properties.datasource.properties.consumerGroupName = $consumerGroupName
@@ -63,6 +63,9 @@ $JobObject.properties.inputs += $InputObject
 $TempInputFile = New-TemporaryFile
 $JobObject | ConvertTo-Json -Depth 25 -Compress > $TempInputFile
 
-New-AzStreamAnalyticsJob -ResourceGroupName $ResourceGroupName -File $TempInputFile -Name $JobName -Force
+$StreamAnalyticsJob =  New-AzStreamAnalyticsJob -ResourceGroupName $ResourceGroupName -File $TempInputFile -Name $JobName -Force
 Remove-Item $TempInputFile
 
+Write-Host Azure StreamAnalyticsJob name is: $StreamAnalyticsJob.JobName
+Write-Host ProvisioningState is: $StreamAnalyticsJob.ProvisioningState
+Write-Host JobState is: $StreamAnalyticsJob.JobState
