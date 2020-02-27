@@ -1,6 +1,7 @@
-#! /bin/env pwsh
 Param (
-    $username
+    [Parameter(Mandatory)]
+    [ValidatePattern({^tweaker-\d{3}$},ErrorMessage = "{0} is not a valid username")]
+    [string]$username
 )
 
 function New-AzureLogin()
