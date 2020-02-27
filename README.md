@@ -2,6 +2,8 @@
 
 Boost your Azure knowledge during the Schuberg Philis meet-up dinner
 
+![Schubergphilis Tweakers workshop](tweakers.png)
+
 During the workshop Schuberg Philis will demonstrate step-by-step all kinds of Azure applications. You get to see the potential of Azure and IoT. The engineers will show, among other things, what is needed to connect a smart lamp to Microsoft's cloud platform. Schuberg also gives Philis examples of how they use Azure and IoT in their work.
 
 ## Index
