@@ -18,10 +18,10 @@ If we would want to go for InfluxDB, we would need something like Azure Databric
    * **Server**: Click on __Create new__
       * **Server name**: Pick a Servername that you can remember (suggestion: *tweakers-sql-[number in your username] e.g. tweakers-sql-013*)
       * **Server admin login**: Pick a username, remember it we will use it later on!
-      * **Password**:  Fill in a password that you can remember.
+      * **Password**:  Fill in a [password](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver15) that you can remember.
       * **Location**: Please use __(Europe) West Europe__
    * **Want to use SQL elastic pool?**: No
-   * **Compute + Storage**: Click on __Configure Database__ 
+   * **Compute + Storage**: Click on __Configure Database__
       * _You are only allowed to deploy Basic DTU based SQL Servers, this is to save us €€€ and maybe do this more often_
       * In the configuration screen click on **Looking for basic, standard,premium?**
       * Select **Basic** and click **Apply** (The 2GB database is good enough for this workshop)
@@ -41,7 +41,7 @@ For the Tables we have provided a script for you. You can find it in the subfold
 Lets run the script!
 
 ### Granting access from your IP Address
-First we will need to allowe our IP address access to the server/database. Even though we will use the built in Query editor on the Azure Portal, it still assumes the connection is from your client's IP address and not an Azure IP Address.
+First we will need to allow our IP address access to the server/database. Even though we will use the built in Query editor on the Azure Portal, it still assumes the connection is from your client's IP address and not an Azure IP Address.
 
 1. On the Overview page of your newly deployed Database find the server name and click on it.
 

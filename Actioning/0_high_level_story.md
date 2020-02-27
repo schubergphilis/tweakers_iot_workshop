@@ -18,7 +18,7 @@ Each Table has its own resource group with all the per-table shared azure resour
 You can find credentials that you can use to login to portal.azure.com on each table.
 Please do not deploy additional IoT Hubs, as they won't be able to receive data from the Beer taps. Each deployed IoT Hub needs to be configured on the Beer Taps and the ones we deployed have been configured on our Beer Taps.
 
-Each Table also has a Philips Hue colour bulb, these bulbs are all named after planets from the Star Wars Universe. There is a sticker on the bulb indicating the name of the bulb. These bulbs are attached to a Hue Bridge that we have setup along with an API that is running in an Azure App Service. 
+Each Table also has a Philips Hue colour bulb, these bulbs are all named after planets from the Star Wars Universe. There is a sticker on the bulb indicating the name of the bulb. These bulbs are attached to a Hue Bridge that we have setup along with an API that is running in an Azure App Service.
 
 ## Setup per Workshop attendeed
 Each workshop attendee wil also receive an own Resource group in which he/she can deploy the neccesary resources. The resource group that belongs to you can be found on the table as well.

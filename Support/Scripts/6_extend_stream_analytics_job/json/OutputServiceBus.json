@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "datasource": {
+      "type": "Microsoft.ServiceBus/Queue",
+      "properties": {
+        "serviceBusNamespace": "<serviceBusNamespace>",
+        "sharedAccessPolicyName": "RootManageSharedAccessKey",
+        "SharedAccessPolicyKey": "<SharedAccessPolicyKey>",
+        "queueName": "pouring_events",
+        "propertyColumns": []
+      }
+    },
+    "serialization": {
+      "type": "Json",
+      "properties": {
+        "encoding": "UTF8",
+        "format": "LineSeparated"
+      }
+    }
+  },
+  "name": "BeerPouringLive"
+}
