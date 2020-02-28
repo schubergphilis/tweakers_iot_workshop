@@ -19,6 +19,10 @@ Param (
     [Parameter(Mandatory=$false)]
     [string]$JobName = 'BeerJob',
     [Parameter(Mandatory=$false)]
+    [string]$sqluser = $userName,
+    [Parameter(Mandatory)]
+    [string]$sqlpassword,
+    [Parameter(Mandatory=$false)]
     [string]$serviceBusNamespace = $username
 )
 
@@ -41,19 +45,35 @@ $scriptDirectory = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 
 $Sequence = $username.split('-')[-1]
 $ResourceGroupName =  'lab001-weu-mgmt-twkrs-rsg-{0:000}' -f $Sequence
+$sqlServerName = 'twkrs-{0:000}-sql' -f $Sequence
 
 $ServiceBusKey = (Get-AzServiceBusKey -ResourceGroupName $ResourceGroupName -Namespace $serviceBusNamespace -Name RootManageSharedAccessKey).PrimaryKey
 
-$OutputObject = (Get-Content (Join-Path $scriptDirectory 'json/OutputServiceBus.json') | ConvertFrom-Json)
-$OutputObject.name = 'BeerPouringLive'
-$OutputObject.properties.datasource.properties.serviceBusNamespace = $username
-$OutputObject.properties.datasource.properties.SharedAccessPolicyKey = $ServiceBusKey
+$ServiceBusOutputObject = (Get-Content (Join-Path $scriptDirectory 'json/OutputServiceBus.json') | ConvertFrom-Json)
+$ServiceBusOutputObject.name = 'BeerPouringLive'
+$ServiceBusOutputObject.properties.datasource.properties.serviceBusNamespace = $username
+$ServiceBusOutputObject.properties.datasource.properties.SharedAccessPolicyKey = $ServiceBusKey
 
-$TempInputFile = New-TemporaryFile
-$OutputObject | ConvertTo-Json -Depth 25 -Compress > $TempInputFile
+$ServiceBusTempInputFile = New-TemporaryFile
+$ServiceBusOutputObject | ConvertTo-Json -Depth 25 -Compress > $ServiceBusTempInputFile
 
-New-AzureRmStreamAnalyticsOutput -ResourceGroupName $ResourceGroupName -File $TempInputFile -JobName $jobName -Name 'BeerPouringLive' -Force | Out-Null
-Remove-Item $TempInputFile
+New-AzureRmStreamAnalyticsOutput -ResourceGroupName $ResourceGroupName -File $ServiceBusTempInputFile -JobName $jobName -Name 'BeerPouringLive' -Force | Out-Null
+Remove-Item $ServiceBusTempInputFile
+
+$DataBaseOutputObject = (Get-Content (Join-Path $scriptDirectory 'json/OutputDatabase.json') | ConvertFrom-Json)
+$DataBaseOutputObject.name = 'BeerPouringArchive'
+$DataBaseOutputObject.properties.datasource.properties.server = ('{0}.database.windows.net' -f $sqlServerName)
+$DataBaseOutputObject.properties.datasource.properties.user = $sqluser
+$DataBaseOutputObject.properties.datasource.properties.password = $sqlpassword
+$DataBaseOutputObject.properties.datasource.properties.table = 'BeerPouringArchive'
+
+$DataBaseTempInputFile = New-TemporaryFile
+$OutputObject | ConvertTo-Json -Depth 25 -Compress > $DataBaseTempInputFile
+
+New-AzureRmStreamAnalyticsOutput -ResourceGroupName $ResourceGroupName -File $DataBaseTempInputFile -JobName $jobName -Name $OutputName -Force | Out-Null
+
+Remove-Item $DataBaseTempInputFile
+Clear-Variable OutputObject
 
 New-AzStreamAnalyticsTransformation -ResourceGroupName $ResourceGroupName -File (Join-Path $scriptDirectory "json/Transformation.json") -JobName $jobName -Name "Transformation" -Force | Out-Null
 
