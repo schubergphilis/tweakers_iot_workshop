@@ -68,9 +68,9 @@ $DataBaseOutputObject.properties.datasource.properties.password = $sqlpassword
 $DataBaseOutputObject.properties.datasource.properties.table = 'BeerPouringArchive'
 
 $DataBaseTempInputFile = New-TemporaryFile
-$OutputObject | ConvertTo-Json -Depth 25 -Compress > $DataBaseTempInputFile
+$DataBaseOutputObject | ConvertTo-Json -Depth 25 -Compress > $DataBaseTempInputFile
 
-New-AzureRmStreamAnalyticsOutput -ResourceGroupName $ResourceGroupName -File $DataBaseTempInputFile -JobName $jobName -Name $OutputName -Force | Out-Null
+New-AzureRmStreamAnalyticsOutput -ResourceGroupName $ResourceGroupName -File $DataBaseTempInputFile -JobName $jobName -Name 'BeerPouringArchive' -Force | Out-Null
 
 Remove-Item $DataBaseTempInputFile
 Clear-Variable OutputObject
