@@ -152,7 +152,7 @@ Oke so now that we know how the message looks like lets parse the json we get fr
 
 15. Now click on the little "+" icon on the right of the case statement and repea this for our next case `stopped`
 
-Now at the end of this our switch should look like this
+Now at the end of all these steps our switch should look like this
 
 ![Slack](img/lapp_step_switch.png)
 
