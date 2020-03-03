@@ -130,7 +130,7 @@ Our job failed to start WTF?!
 ![Stream Analytics](img/WTF.jpg)
 
 
-If you get an error you can find the reaon in the Activity Log.
+If you get an error you can find the reason in the Activity Log.
 
 ![Stream Analytics](img/asa_failure_log.jpg)
 
@@ -140,7 +140,7 @@ Aah the firewall on the sql server is blocking the Stream Analytics job:
 
 
 Let us fix this, go back to the SQL Server you created earlier (The SQL Server, not the SQL DB ;) )
-You shouls be able to find the SQL Server in your resource Group:
+You should be able to find the SQL Server in your resource Group:
 
 ![Stream Analytics](img/asa_sql_server.jpg)
 
@@ -148,7 +148,7 @@ When you are in the Overview screen of your SQL Server, go to the __Firewalls an
 
 ![Stream Analytics](img/asa_sql_firewall.jpg)
 
-You can now do either do one of these things.
+You can now do either do one of the following.
 1. Add all the available Azure Stream Analytics IP Addresses
 2. OR turn on the __Allow Azure services and resources to access this server
 
