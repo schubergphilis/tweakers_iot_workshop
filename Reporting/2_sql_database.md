@@ -1,10 +1,6 @@
 # Step 2: Create an Azure SQL DB (and SQL Server)
 For this part of the workshop we will use Azure SQL DB as an Output for the Stream Analytics Job. This Database and server are not pre-deployed for you, so let us do that now.
 
-## Bonus: Why we chose SQL Server as Output for this workshop
-As we are going to use Grafana to visualize the data, the more obvious choise would be an InfluxDB or something like that. However Azure Stream Analytics does not support InfluxDB as an output.
-If we would want to go for InfluxDB, we would need something like Azure Databricks or an container running some code between the IoT-Hub and the InfluxDB. Where Databricks is way more expensive just for this workshop. We could also choose for Cosmos DB, which also supports timeseries. However Grafana doesn't support Cosmos DB. Besides that I have more experience with SQL, so it was easier to put together.
-
 ## Creating the database (and server at the same time)
 1. Click on __Create a resource__
 2. Select __SQL Database__

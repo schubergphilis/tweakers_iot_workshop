@@ -15,7 +15,11 @@ In this part we will make a dashboard that can report on the data from the Beer 
 PowerBI didn't make the workshop, needed accounts for everybody and realtime was only in paid subscription.
 
 #### InfluxDB, or simular time series database
-Ideally you would use a time series database for Grafana. Azure's CosmosDB would be the ideal candidate for this. However there is no Grafana datasource plugin yet for CosmosDB so we decided not the use this. Other option would be to install InfluxDB on a VM or as container. This would make the setup more complex then needed for the workshop. A more suitable solition could be to use the TimescaleDB plugin for Azure Database for PostgreSQL.
+Ideally you would use a time series database for Grafana. Azure's CosmosDB would be the ideal candidate for this. However there is no Grafana datasource plugin yet for CosmosDB so we decided not the use this.A more suitable solition could be to use the TimescaleDB plugin for Azure Database for PostgreSQL.
+
+Azure Stream Analytics does not support InfluxDB as an output either. So we would need something like Azure Databricks or an container running some code between the IoT-Hub and the InfluxDB. Where Databricks is way more expensive just for this workshop. Besides that Eelco has more experience with SQL, so it was easier to put together.
+
+All in all this would make the setup more complex then needed for the workshop.
 
 ## Small Architecture sketch
 ![High Level Architecture](img/high_level_architecture.jpg "Architecture")
