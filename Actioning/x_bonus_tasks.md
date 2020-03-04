@@ -31,4 +31,7 @@ We have provided a list with interesting sensors/data that you can play with:
 | Rall          | state_locking      | Tells you if the Keg is locked in place | 
 
 
-## 3. 
+## 3. Replace Logic App with a Function App
+If you have more of a developer background, you could ofcourse create an Azure Function to replace the Logic App. We only chose to use a logic app because we could have attendees that have no programming experience at all, or not everybody has the same programming language preference as we do. So that would be a lot of work for us.
+
+However you are free to create a Function App to do reach the same goal.
