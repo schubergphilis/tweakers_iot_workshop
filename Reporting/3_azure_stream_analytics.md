@@ -55,7 +55,7 @@ For the Output's we need more than 1, we will create 3 outputs (a fourth will be
 1. On the Stream Analytics Job's page click on **Outputs**
 2. Click on **Add** and select *SQL Database*
 3. Fill in the Folowing Details (If it is not mentioned below, use the default value):
-      * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerIOstat_ for example)
+      * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerRall_ for example)
       * **Subscription**: You should have only 1 choice here "SBPE – SchubergPhilis – EVN"
       * **Database**: The database that you created earlier.
       * **Username**: The username you filled in when you created the SQL Database
@@ -68,7 +68,7 @@ For the Output's we need more than 1, we will create 3 outputs (a fourth will be
 1. On the Stream Analytics Job's page click on **Outputs**
 2. Click on **Add** and select *SQL Database*
 3. Fill in the Folowing Details (If it is not mentioned below, use the default value):
-      * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerIOstat_ for example)
+      * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerTemperature_ for example)
       * **Subscription**: You should have only 1 choice here "SBPE – SchubergPhilis – EVN"
       * **Database**: The database that you created earlier.
       * **Username**: The username you filled in when you created the SQL Database
