@@ -82,7 +82,7 @@ First step is to make sure the logic app is triggered when a new message arrives
       ![Slack](img/lapp_post_message.png)
 
 4. Fill in the following fields:
-    * **Channel Name**: *#azure-iot* is the designated SPAM channel :P
+    * **Channel Name**: *#azure-iot-XXX* is the designated SPAM channel per table:P (where XXX is your table number)
     * **Message**: Type the text "Tweaker XXX sends: " (where XXX is your number).
 
     Then from the **add dynamic content** menu add **Content**
