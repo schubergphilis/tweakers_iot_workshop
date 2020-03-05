@@ -23,15 +23,23 @@ Let's store these events in the database as a cold path and add a hot path at th
       * **Use existing queue**: Selected
       * **Queue**: Select the queue name from the dropdownlist. (e.g. *pouring_events* if you followed the example)
       * **All Other fields**: Leave Default value
-6. Click on **Save**
-7. Click on **Query**
+      4. Click on **Add** and select *Service Bus Queue*
+6. Click on **Add** and select *SQL Database*
+7. Fill in the following details:
+      * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerPouringArchive_ for example)
+      * **Subscription**: You should have only 1 choice here "SBPE – SchubergPhilis – EVN"
+      * **Database**: The database that you created earlier.
+      * **Username**: The username you filled in when you created the SQL Database
+      * **Password**: Whatever password that belongs to this user.
+      * **Table**: Fill in _BeerPouring_. Click on **Save**
+9. Click on **Query**
 
     ![Stream Analytics](img/asa_output.jpg)
 
-8. Go to the qurey editor to add the output to the query
-9. Scroll all the way to the bottom and add the content from the *stream_analytics_query_part2.sql* file that is found int he stream_analytics folder (keep in mind that it can be found in the Actioning main directory).
+10. Go to the qurey editor to add the output to the query
+11. Scroll all the way to the bottom and add the content from the *stream_analytics_query_part2.sql* file that is found int he stream_analytics folder (keep in mind that it can be found in the Actioning main directory).
 
     ![Stream Analytics](img/asa_extended_query.jpg)
 
-10. Click on **Save query**
-11. Start the Job again.
+12. Click on **Save query**
+13. Start the Job again.
