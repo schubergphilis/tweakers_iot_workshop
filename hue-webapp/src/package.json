@@ -1,0 +1,17 @@
+{
+  "name": "hue-webapp",
+  "version": "1.0.0",
+  "description": "app for hue",
+  "scripts": {
+    "start": "node index.js",
+    "debug": "node --inspect-brk index.js",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@q42philips/hue-color-converter": "^1.0.0",
+    "color-convert": "^2.0.1",
+    "express": "^4.17.1",
+    "node-hue-api": "^4.0.5"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,34 @@
+parameters:
+  vmImage: ''
+
+jobs:
+- job: build
+  pool:
+    vmImage: ${{ parameters.vmImage }}
+  steps:
+
+  - checkout: self
+    clean: true
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+
+  - task: Npm@1
+    inputs:
+      command: custom
+      workingDir: $(System.DefaultWorkingDirectory)/src
+      customCommand: ci
+
+  - task: ArchiveFiles@2
+    displayName: "Archive files"
+    inputs:
+      rootFolderOrFile: "$(System.DefaultWorkingDirectory)/src"
+      includeRootFolder: false
+      archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
+
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
+      name: 'drop'

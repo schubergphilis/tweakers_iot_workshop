@@ -1,0 +1,31 @@
+parameters:
+  vmImage: ''
+
+jobs:
+- job: deploy
+  pool:
+    vmImage: ${{ parameters.vmImage }}
+  variables:
+  - group: hue-webapp-variables
+  steps:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifactName: drop
+      targetPath: $(Build.SourcesDirectory)/package
+
+  - task: AzureResourceGroupDeployment@2
+    inputs:
+      azureSubscription: ${{ parameters.connectedServiceName }}
+      resourceGroupName: ${{ parameters.resourceGroupName }}
+      location: ${{ parameters.location }}
+      csmFile: $(Build.SourcesDirectory)/templates/azuredeploy.json
+      overrideParameters: '-appName ${{ parameters.appName }}'
+
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: ${{ parameters.connectedServiceName }}
+      appType: 'webApp'
+      appName: ${{ parameters.appName }}
+      package: $(Build.SourcesDirectory)/package/**/*.zip
+      runtimeStack: 'NODE|10-lts'
+      appSettings: -CLIENT_ID $(client_id) -CLIENT_SECRET $(client_secret) -STATE $(state)

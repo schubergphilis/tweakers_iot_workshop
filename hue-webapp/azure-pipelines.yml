@@ -1,0 +1,28 @@
+name: $(date:yyyy.M.d)-$(Build.SourceBranchName)-$(date:HHmm)
+
+variables:
+  - name: vmImage
+    value: ubuntu-latest
+
+trigger:
+  branches:
+    include:
+    - "*"
+
+stages:
+- stage: build
+  jobs:
+  - template: _ci/build.yml
+    parameters:
+      vmImage: $(vmImage)
+
+- stage: deploy
+  jobs:
+  - template: _ci/deploy.yml
+    parameters:
+      vmImage: $(vmImage)
+      resourceGroupName: $(resourceGroupName)
+      connectedServiceName: $(connectedServiceName)
+      location: westeurope
+      appName: sbphuelight
+
