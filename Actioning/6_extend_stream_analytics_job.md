@@ -26,7 +26,7 @@ Let's store these events in the database as a cold path and add a hot path at th
       4. Click on **Add** and select *Service Bus Queue*
 6. Click on **Add** and select *SQL Database*
 7. Fill in the following details:
-      * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerPouringArchive_ for example)
+      * **Outpus Alias**: A nice Alias for this Output, I would suggest to make the type of data part of the aliase. (_BeerPouring_ for example)
       * **Subscription**: You should have only 1 choice here "SBPE – SchubergPhilis – EVN"
       * **Database**: The database that you created earlier.
       * **Username**: The username you filled in when you created the SQL Database
